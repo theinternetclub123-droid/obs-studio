@@ -19,7 +19,7 @@ struct MultiStreamDestination {
 
 class MultiStreamOutput {
 public:
-	static constexpr size_t MAX_DESTINATIONS = 3;
+	static constexpr size_t MAX_DESTINATIONS = 2;
 
 	static const char *const PLATFORM_NAMES[MAX_DESTINATIONS];
 	static const char *const CONFIG_SECTIONS[MAX_DESTINATIONS];

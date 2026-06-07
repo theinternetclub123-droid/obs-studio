@@ -5,13 +5,11 @@
 #include <obs.h>
 #include <util/config-file.h>
 
-const char *const MultiStreamOutput::PLATFORM_NAMES[MAX_DESTINATIONS] = {"YouTube", "Twitch", "TikTok"};
+const char *const MultiStreamOutput::PLATFORM_NAMES[MAX_DESTINATIONS] = {"Twitch", "TikTok"};
 
-const char *const MultiStreamOutput::CONFIG_SECTIONS[MAX_DESTINATIONS] = {"MultiStreamYouTube", "MultiStreamTwitch",
-									   "MultiStreamTikTok"};
+const char *const MultiStreamOutput::CONFIG_SECTIONS[MAX_DESTINATIONS] = {"MultiStreamTwitch", "MultiStreamTikTok"};
 
 const char *const MultiStreamOutput::DEFAULT_SERVERS[MAX_DESTINATIONS] = {
-	"rtmp://a.rtmp.youtube.com/live2",
 	"rtmp://live.twitch.tv/app",
 	"rtmp://push.tiktok.com/live/",
 };
@@ -32,9 +30,7 @@ void MultiStreamOutput::LoadConfig()
 		const char *section = CONFIG_SECTIONS[i];
 
 		destinations[i].enabled = config_get_bool(config, section, "Enabled");
-
-		const char *server = config_get_string(config, section, "Server");
-		destinations[i].server = (server && *server) ? server : DEFAULT_SERVERS[i];
+		destinations[i].server = DEFAULT_SERVERS[i];
 
 		const char *key = config_get_string(config, section, "Key");
 		destinations[i].key = key ? key : "";

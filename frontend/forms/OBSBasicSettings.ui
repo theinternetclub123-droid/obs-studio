@@ -2194,76 +2194,15 @@
                  <property name="bottomMargin">
                   <number>9</number>
                  </property>
-                 <!-- YouTube -->
                  <item>
-                  <layout class="QFormLayout" name="multiStreamYouTubeLayout">
-                   <property name="fieldGrowthPolicy">
-                    <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+                  <widget class="QLabel" name="multiStreamDescription">
+                   <property name="text">
+                    <string>Basic.Settings.Stream.MultiStream.Description</string>
                    </property>
-                   <item row="0" column="0">
-                    <spacer name="multiStreamYouTubeSpacer">
-                     <property name="orientation">
-                      <enum>Qt::Horizontal</enum>
-                     </property>
-                     <property name="sizeType">
-                      <enum>QSizePolicy::Fixed</enum>
-                     </property>
-                     <property name="sizeHint" stdset="0">
-                      <size>
-                       <width>170</width>
-                       <height>0</height>
-                      </size>
-                     </property>
-                    </spacer>
-                   </item>
-                   <item row="0" column="1">
-                    <widget class="QCheckBox" name="multiStreamYouTubeEnable">
-                     <property name="text">
-                      <string>Basic.Settings.Stream.MultiStream.YouTube</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="0">
-                    <widget class="QLabel" name="multiStreamYouTubeServerLabel">
-                     <property name="text">
-                      <string>Basic.Settings.Stream.MultiStream.Server</string>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>170</width>
-                       <height>0</height>
-                      </size>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="1">
-                    <widget class="QLineEdit" name="multiStreamYouTubeServer">
-                     <property name="placeholderText">
-                      <string>rtmp://a.rtmp.youtube.com/live2</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="0">
-                    <widget class="QLabel" name="multiStreamYouTubeKeyLabel">
-                     <property name="text">
-                      <string>Basic.Settings.Stream.MultiStream.StreamKey</string>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>170</width>
-                       <height>0</height>
-                      </size>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="1">
-                    <widget class="QLineEdit" name="multiStreamYouTubeKey">
-                     <property name="echoMode">
-                      <enum>QLineEdit::Password</enum>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
                  </item>
                  <!-- Twitch -->
                  <item>
@@ -2295,26 +2234,6 @@
                     </widget>
                    </item>
                    <item row="1" column="0">
-                    <widget class="QLabel" name="multiStreamTwitchServerLabel">
-                     <property name="text">
-                      <string>Basic.Settings.Stream.MultiStream.Server</string>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>170</width>
-                       <height>0</height>
-                      </size>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="1">
-                    <widget class="QLineEdit" name="multiStreamTwitchServer">
-                     <property name="placeholderText">
-                      <string>rtmp://live.twitch.tv/app</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="0">
                     <widget class="QLabel" name="multiStreamTwitchKeyLabel">
                      <property name="text">
                       <string>Basic.Settings.Stream.MultiStream.StreamKey</string>
@@ -2327,10 +2246,13 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="1">
+                   <item row="1" column="1">
                     <widget class="QLineEdit" name="multiStreamTwitchKey">
                      <property name="echoMode">
                       <enum>QLineEdit::Password</enum>
+                     </property>
+                     <property name="placeholderText">
+                      <string>Basic.Settings.Stream.MultiStream.KeyPlaceholder</string>
                      </property>
                     </widget>
                    </item>
@@ -2366,26 +2288,6 @@
                     </widget>
                    </item>
                    <item row="1" column="0">
-                    <widget class="QLabel" name="multiStreamTikTokServerLabel">
-                     <property name="text">
-                      <string>Basic.Settings.Stream.MultiStream.Server</string>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>170</width>
-                       <height>0</height>
-                      </size>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="1">
-                    <widget class="QLineEdit" name="multiStreamTikTokServer">
-                     <property name="placeholderText">
-                      <string>rtmp://push.tiktok.com/live/</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="0">
                     <widget class="QLabel" name="multiStreamTikTokKeyLabel">
                      <property name="text">
                       <string>Basic.Settings.Stream.MultiStream.StreamKey</string>
@@ -2398,10 +2300,13 @@
                      </property>
                     </widget>
                    </item>
-                   <item row="2" column="1">
+                   <item row="1" column="1">
                     <widget class="QLineEdit" name="multiStreamTikTokKey">
                      <property name="echoMode">
                       <enum>QLineEdit::Password</enum>
+                     </property>
+                     <property name="placeholderText">
+                      <string>Basic.Settings.Stream.MultiStream.KeyPlaceholder</string>
                      </property>
                     </widget>
                    </item>
