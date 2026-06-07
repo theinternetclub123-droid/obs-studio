@@ -6,7 +6,7 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QMessageBox>
-#include <QLabel>
+#include <QPushButton>
 #include <QProcess>
 
 #include "moc_OBSBasicStatusBar.cpp"
@@ -42,11 +42,14 @@ OBSBasicStatusBar::OBSBasicStatusBar(QWidget *parent)
 	statusWidget->ui->issuesFrame->hide();
 	statusWidget->ui->kbps->hide();
 
-	QLabel *updateLink = new QLabel(tr("<a href='update'>Check for Updates</a>"), this);
-	updateLink->setTextInteractionFlags(Qt::LinksAccessibleByMouse);
-	updateLink->setOpenExternalLinks(false);
-	updateLink->setContentsMargins(4, 0, 4, 0);
-	connect(updateLink, &QLabel::linkActivated, this, [this]() {
+	QPushButton *updateLink = new QPushButton(tr("Check for Updates"), this);
+	updateLink->setFlat(true);
+	updateLink->setCursor(Qt::PointingHandCursor);
+	updateLink->setStyleSheet(
+		"QPushButton { color: white; background: transparent; border: none;"
+		"              padding: 0 4px; margin: 0; }"
+		"QPushButton:hover { text-decoration: underline; }");
+	connect(updateLink, &QPushButton::clicked, this, [this]() {
 		auto answer = QMessageBox::question(
 			this, tr("Check for Updates"),
 			tr("OBS will close and reopen automatically — this takes a few minutes. Continue?"),
