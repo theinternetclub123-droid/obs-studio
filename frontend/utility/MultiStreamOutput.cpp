@@ -5,13 +5,11 @@
 #include <obs.h>
 #include <util/config-file.h>
 
-const char *const MultiStreamOutput::PLATFORM_NAMES[MAX_DESTINATIONS] = {"YouTube", "Twitch", "TikTok"};
+const char *const MultiStreamOutput::PLATFORM_NAMES[MAX_DESTINATIONS] = {"Twitch", "TikTok"};
 
-const char *const MultiStreamOutput::CONFIG_SECTIONS[MAX_DESTINATIONS] = {"MultiStreamYouTube", "MultiStreamTwitch",
-									   "MultiStreamTikTok"};
+const char *const MultiStreamOutput::CONFIG_SECTIONS[MAX_DESTINATIONS] = {"MultiStreamTwitch", "MultiStreamTikTok"};
 
 const char *const MultiStreamOutput::DEFAULT_SERVERS[MAX_DESTINATIONS] = {
-	"rtmp://a.rtmp.youtube.com/live2",
 	"rtmp://live.twitch.tv/app",
 	"rtmp://push.tiktok.com/live/",
 };
@@ -24,6 +22,14 @@ MultiStreamOutput::MultiStreamOutput(OBSBasic *main_) : main(main_)
 	}
 }
 
+MultiStreamOutput::~MultiStreamOutput()
+{
+	/* Force-stop and release any active secondary outputs while libobs is
+	 * still alive. This must happen before obs_shutdown(), which is why
+	 * OBSBasic explicitly resets this object during applicationShutdown(). */
+	Stop(true);
+}
+
 void MultiStreamOutput::LoadConfig()
 {
 	config_t *config = main->Config();
@@ -32,9 +38,7 @@ void MultiStreamOutput::LoadConfig()
 		const char *section = CONFIG_SECTIONS[i];
 
 		destinations[i].enabled = config_get_bool(config, section, "Enabled");
-
-		const char *server = config_get_string(config, section, "Server");
-		destinations[i].server = (server && *server) ? server : DEFAULT_SERVERS[i];
+		destinations[i].server = DEFAULT_SERVERS[i];
 
 		const char *key = config_get_string(config, section, "Key");
 		destinations[i].key = key ? key : "";
@@ -88,6 +92,11 @@ bool MultiStreamOutput::StartDestination(MultiStreamDestination &dest, obs_encod
 
 bool MultiStreamOutput::Start(obs_encoder_t *videoEncoder, obs_encoder_t *audioEncoder)
 {
+	/* Defensive: tear down any outputs left over from a previous session
+	 * (e.g. a reconnect that re-entered Start without an intervening Stop)
+	 * so we never orphan a running output by overwriting its handle. */
+	Stop(true);
+
 	LoadConfig();
 
 	bool anyStarted = false;
